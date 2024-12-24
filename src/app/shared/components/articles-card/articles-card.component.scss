@@ -1,0 +1,44 @@
+@import "../../../../assets/styles/variables";
+@import "../../../../assets/styles/mixins";
+
+.articles-item {
+  height: 571px;
+  width: 292px;
+  position: relative;
+
+  .articles-item-category {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 11px;
+    color: $blue-text-color;
+    padding: 10px 18px;
+    border-radius: 5px;
+    background-color: white;
+  }
+
+  .articles-item-img {
+    width: 291px;
+    height: 291px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .articles-item-title {
+    @include montserrat-20();
+    margin-top: 15px;
+  }
+  .articles-item-text {
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  .articles-item-additional-btn {
+    position:absolute;
+    bottom:0;
+    a {
+      color: $blue-text-color;
+      text-decoration: underline;
+      vertical-align: bottom;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+@import "variables";
+@mixin head-lora-38{
+  font-family: 'Lora', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 38px;
+  color: $blue-text-color;
+}
+@mixin montserrat-20{
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  color: $blue-text-color;
+}

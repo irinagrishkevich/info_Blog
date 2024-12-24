@@ -1,0 +1,60 @@
+@import "../../../../assets/styles/variables";
+
+header.header {
+  padding: 40px 0;
+  .container {
+     display: flex;
+      align-items: center;
+    justify-content: space-between;
+      font-family: 'Montserrat',sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+
+      .header-menu{
+
+
+        nav ul{
+          margin: 0;
+          padding: 0;
+          display: flex;
+          gap: 30px;
+
+          li{
+            list-style: none;
+            border-bottom: 1px solid transparent;
+
+            &.active {
+              border-bottom-color: $blue-text-color;
+            }
+
+
+            a {
+              color: #071739;
+              cursor: pointer;
+
+              &:hover{
+                color: $blue-text-color;
+              }
+            }
+          }
+        }
+      }
+
+      .header-top-phone{
+        color: $blue-text-color;
+        margin-left: 141px;
+      }
+    .header-actions{
+      cursor: pointer;
+      a{
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        color: $darkblue-text-color;
+      }
+
+    }
+
+    }
+
+}

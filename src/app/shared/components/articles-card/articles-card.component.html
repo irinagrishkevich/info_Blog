@@ -1,0 +1,9 @@
+<div class="articles-item" *ngIf="article" (click)="navigate()">
+  <div class="articles-item-category">{{ article.category }}</div>
+  <div class="articles-item-img" style="background-image: url({{staticUrlImage + article.image }})"></div>
+  <div class="articles-item-title">{{ article.title }}</div>
+  <div class="articles-item-text">{{ article.description | textTransform}}</div>
+  <div class="articles-item-additional-btn">
+    <a href="#">Читать дальше</a>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+@import "../../../../assets/styles/variables";
+@import "../../../../assets/styles/mixins";
+
+.login{
+  padding: 106px 0 92px 0;
+
+  .container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .auth-form{
+    max-width: 429px;
+
+    .auth-title{
+      @include head-lora-38();
+      font-size: 36px;
+      margin-bottom: 40px;
+    }
+
+    .auth-inputs{
+      margin-bottom: 40px;
+
+      .auth-input{
+        margin-bottom: 5px;
+
+        input{
+          width: 422px;
+        }
+
+        &:last-child{
+          margin-bottom: 0;
+          padding-top: 5px;
+        }
+      }
+
+      .auth-checkbox{
+        display: flex;
+        align-items: baseline;
+
+        input{
+          margin-right: 10px;
+        }
+        label{
+          font-size: 14px;
+        }
+      }
+
+
+    }
+
+    .auth-button{
+      margin-bottom: 10px;
+
+      button{
+        width: 422px;
+        padding: 15px;
+        font-size: 16px;
+      }
+    }
+
+    .auth-link{
+      font-size: 14px;
+
+      a{
+        color: $blue-text-color;
+      }
+    }
+  }
+}

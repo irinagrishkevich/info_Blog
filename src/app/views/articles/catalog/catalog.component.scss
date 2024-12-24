@@ -1,0 +1,188 @@
+@import "../../../../assets/styles/variables";
+@import "../../../../assets/styles/mixins";
+
+.catalog {
+  padding-top: 80px;
+  padding-bottom: 120px;
+
+  .container {
+
+    .catalog-title {
+      @include head-lora-38;
+      margin-bottom: 40px;
+    }
+
+
+
+    .catalog-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+
+      .catalog-applied-filters {
+        display: flex;
+        flex-wrap: wrap;
+
+        .catalog-applied-filter {
+          border-radius: 5px;
+          border: 2px solid $blue-text-color;
+          color: $blue-text-color;
+          font-size: 16px;
+          padding: 8px 20px;
+          display: flex;
+          align-items: center;
+          margin-right: 20px;
+          margin-bottom: 20px;
+
+          a {
+            text-decoration: none;
+            cursor: pointer;
+            display: flex;
+            margin-left: 8px;
+          }
+        }
+
+
+
+
+      }
+      .catalog-sorting {
+        width: 148px;
+        min-width: 148px;
+        box-sizing: border-box;
+        position: relative;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: left;
+
+
+        .catalog-sorting-head {
+          display: flex;
+          align-items: center;
+          padding: 12px 0 12px 23px;
+          justify-content: space-between;
+
+        }
+
+        .catalog-sorting-body {
+          position: absolute;
+          box-sizing: border-box;
+          width: 100%;
+          z-index: 3;
+          display: none;
+          padding: 12px 23px;
+          border-radius: 0 0 5px 5px;
+          background: #EBEBEB;
+          color: #BEBEBE;
+
+          .catalog-sorting-item{
+            margin-bottom: 19px;
+            cursor: pointer;
+            padding: 10px;
+            color: #BEBEBE;
+            display: flex;
+            justify-content: space-between;
+
+            &.selected{
+              color: $darkblue-text-color;
+            }
+
+            &.active{
+              color: $darkblue-text-color
+            }
+
+            &:last-child{
+              margin-bottom: 12px;
+            }
+          }
+        }
+
+        &.open {
+          width: 257px;
+          min-width: 257px;
+
+          .catalog-sorting-head {
+            color: #000;
+            border-radius: 5px 5px 0 0;
+            background: #B9D5FD;
+            padding-right: 23px;
+            justify-content: space-between;
+
+          }
+
+          &.open .catalog-sorting-body {
+            display: block;
+          }
+        }
+
+
+      }
+    }
+
+    .catalog-layout {
+      display: flex;
+      margin-bottom: 60px;
+
+      .no-products-text{
+        font-size: 20px;
+        margin-top: 30px;
+      }
+
+      .catalog-products {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px 40px;
+      }
+
+
+    }
+
+    .pagination {
+      margin-top: 79px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .pagination-arrow {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.disabled svg {
+          opacity: 0.4;
+        }
+      }
+
+      .pagination-pages {
+        margin-left: 30px;
+        margin-right: 30px;
+        display: flex;
+        align-items: center;
+
+        a.pagination-page{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+          width: 60px;
+          height: 60px;
+          margin-right: 15px;
+          cursor: pointer;
+          font-size: 20px;
+          color: #B9D5FD;
+
+          &.active{
+            color: $darkblue-text-color;
+          }
+
+          &:last-child{
+            margin-right: 0;
+          }
+        }
+      }
+    }
+
+
+  }
+}
