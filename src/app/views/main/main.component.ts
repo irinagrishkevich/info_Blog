@@ -3,6 +3,7 @@ import {OwlOptions} from 'ngx-owl-carousel-o';
 import {ArticlesService} from 'src/app/shared/services/articles.service';
 import {environment} from 'src/environments/environment';
 import {ArticleType} from 'src/types/article.type';
+import {ArticleRelatedType} from "../../../types/article-related.type";
 
 @Component({
   selector: 'app-main',
@@ -10,7 +11,6 @@ import {ArticleType} from 'src/types/article.type';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  staticUrlImage: string = environment.serverStaticPath;
   slides = [
     {
       image: 'assets/images/page/main-car-3.png',
@@ -101,7 +101,7 @@ export class MainComponent implements OnInit {
     },
   ]
 
-  articles: ArticleType[] = [];
+  articles: ArticleRelatedType[] = [];
   reviews = [
     {
       name: 'Станислав',
@@ -152,7 +152,6 @@ export class MainComponent implements OnInit {
       this.articles = data;
     });
   }
-
 
 }
 

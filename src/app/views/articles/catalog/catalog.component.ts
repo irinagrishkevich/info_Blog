@@ -1,12 +1,13 @@
-import { Component, HostListener, OnInit } from '@angular/core';
-import {ActivatedRoute, Router } from '@angular/router';
-import { debounceTime } from 'rxjs';
+import { Component, EventEmitter, HostListener, OnInit } from '@angular/core';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import { ArticlesService } from 'src/app/shared/services/articles.service';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { ActiveParamsUtil } from 'src/app/shared/utils/active-params.util';
 import { ActiveParamsType } from 'src/types/active-params.type';
 import { ArticleType } from 'src/types/article.type';
 import { CategoriesType } from 'src/types/categories.type';
+import {ArticleResponseType} from "../../../../types/article-response.type";
+import {AppliedFilterType} from "../../../../types/applied-filter.type";
 
 @Component({
   selector: 'app-catalog',
@@ -16,96 +17,54 @@ import { CategoriesType } from 'src/types/categories.type';
 export class CatalogComponent implements OnInit {
 
   categories: CategoriesType[] = []
-  articles: ArticleType[] = []
+  changeCategory = new EventEmitter();
+  activeCategories: string[] = [];
+  articles: ArticleResponseType | null = null;
   sortingOpen: boolean = false;
-  activeParams: ActiveParamsType = {page: 1, categories: []};
-  appliedFilters: { name: string; url: string}[] = [];
+  activeParams: ActiveParamsType = {categories: []};
+  appliedFilters: AppliedFilterType[] = [];
+
   noProducts: boolean = false;
   pages: number[] = []
-  selectedCategories: string[] = [];
-  disabledArrow: boolean = false;
 
   constructor(private categoryService: CategoryService,
               private router: Router,
-              private route: ActivatedRoute,
+              private activatedRoute: ActivatedRoute,
               private articlesService: ArticlesService) { }
 
+
   ngOnInit(): void {
-    this.categoryService.getCategories().subscribe((categories: CategoriesType[]) => {
-      this.categories = categories;
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
+      this.categoryService.getCategories().subscribe((categories: CategoriesType[]) => {
+        this.activeParams = ActiveParamsUtil.processParams(params);
+        this.categories = categories;
 
-    })
-
-    this.getArticles()
-  }
+        this.appliedFilters = [];
+        this.activeParams.categories.forEach(item => {
 
 
-  getArticles(): void {
-    this.articlesService
-      .getArticles(this.activeParams)
-      .subscribe((data: { count: number; pages: number; items: ArticleType[] }) => {
-        this.articles = data.items;
-        this.noProducts = data.items.length === 0;
-        this.pages = Array.from({ length: data.pages }, (_, i) => i + 1);
+          const foundCategory = this.categories.find(category => category.url === item);
+          if (foundCategory) {
+            this.appliedFilters.push({
+              name: foundCategory.name,
+              url: foundCategory.url
+            });
+          }
+        });
 
-        this.route.params
-          .subscribe((params) => {
-            this.activeParams = ActiveParamsUtil.processParams(params)
-            if(!this.activeParams.page){
-              this.activeParams.page = 1;
+        this.articlesService.getArticles(this.activeParams)
+          .subscribe((data: ArticleResponseType) => {
+            this.articles = data;
+            this.pages = [];
+            for (let i = 1; i <= data.pages; i++) {
+              this.pages.push(i);
             }
-
-
-
           });
-
       });
-  }
-  removeAppliedFilter(appliedFilter: { name: string; url: string }): void {
-    this.activeParams.categories = this.activeParams.categories.filter((item) => item !== appliedFilter.url);
-    this.activeParams.page = 1;
-    this.updateRouterParams();
-  }
-
-  updateAppliedFilters(): void {
-    this.appliedFilters = []
-    this.activeParams.categories.forEach((url) => {
-      for(let i = 0; i < this.categories.length; i++){
-        const foundCategories = this.categories[i];
-        if(foundCategories.url === url){
-          this.appliedFilters.push({name: foundCategories.name, url: foundCategories.url})
-        }
-      }
-    })
-  }
-
-  updateRouterParams(): void {
-    this.updateAppliedFilters();
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: { ...this.activeParams },
-      queryParamsHandling: 'merge',
     });
-    this.getArticles();
-  }
-  toggleCategory(category: CategoriesType): void {
-    if (this.isCategorySelected(category)) {
-      this.activeParams.categories = this.activeParams.categories.filter((url) => url !== category.url);
-    } else {
-      this.activeParams.categories.push(category.url);
-    }
-    this.updateRouterParams();
   }
 
-  isCategorySelected(category: CategoriesType): boolean {
-    return this.activeParams.categories.includes(category.url);
-  }
-
-
-
-
-
-  toggleSorting() {
+  sortArticles() {
     this.sortingOpen = !this.sortingOpen;
   }
 
@@ -133,6 +92,32 @@ export class CatalogComponent implements OnInit {
       this.activeParams.page++
       this.router.navigate(['/articles'], {queryParams: this.activeParams});
     }
+  }
+
+  removeAppliedFilter(url: string) {
+    this.activeParams.categories = this.activeParams.categories.filter(item => item !== url);
+
+    this.activeParams.page = 1;
+    this.router.navigate(['/articles'], {
+      queryParams: this.activeParams
+    });
+  }
+
+  addCategory(url: string) {
+    if (this.activeParams.categories.some(category => category === url)) {
+      return this.removeAppliedFilter(url);
+    }
+
+    this.activeParams.categories.push(url);
+
+    this.activeParams.page = 1;
+    this.router.navigate(['/articles'], {
+      queryParams: this.activeParams
+    });
+  }
+
+  getOptionActive(activeUrl: string) {
+    return this.activeCategories.some(category => category === activeUrl);
   }
 
 

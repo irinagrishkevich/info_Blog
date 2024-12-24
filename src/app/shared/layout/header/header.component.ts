@@ -51,20 +51,22 @@ export class HeaderComponent implements OnInit {
 
   // Логика выхода из системы
   logout(): void {
-    this.authServices.logout().subscribe(
-      () => {
+    this.authServices.logout().subscribe({
+      next:() => {
         this.authServices.removeTokens();
         this._snackBar.open('Вы успешно вышли из системы', '', {
           duration: 3000,
         });
-        this.router.navigate(['/']); // Перенаправление на страницу входа
+        this.router.navigate(['/']);
       },
-      (error) => {
-        console.error('Logout error:', error);
-        this._snackBar.open('Ошибка при выходе из системы', '', {
-          duration: 3000,
-        });
+      error: (error) => {
+      console.error('Logout error:', error);
+      this._snackBar.open('Ошибка при выходе из системы', '', {
+        duration: 3000,
+      });
+    }
       }
+
     );
   }
 
