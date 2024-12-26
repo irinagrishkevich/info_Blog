@@ -8,8 +8,7 @@
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.19);
-
-  -index: 999999;
+  z-index: 999999;
   .loader {
     display: flex;
     align-items: center;
