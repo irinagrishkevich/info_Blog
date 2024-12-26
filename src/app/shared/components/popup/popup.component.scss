@@ -10,8 +10,8 @@
   position: fixed;
   padding: 94px 153px 86px 153px;
   box-sizing: border-box;
-  top: calc(50% - 245px);
-  left: calc(50% - 363px);
+  top: calc(50% - 240px);
+  left: calc(50% - 358px);
   z-index: 4;
   &.success {
     padding: 163px 140px;
@@ -34,6 +34,8 @@
         width: 422px;
         height: 53px;
         padding: 10px;
+        border: 2px solid $blue-text-color;
+        border-radius: 3px;
       }
     }
   }
@@ -91,7 +93,9 @@
 //}
 
 
-
+[disabled] {
+  opacity: 0.4;
+}
 
 
 

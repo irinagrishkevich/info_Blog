@@ -7,6 +7,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {RouterModule} from "@angular/router";
 import {MatDialogModule} from "@angular/material/dialog";
 import { LoaderComponent } from './components/loader/loader.component';
+import {NgxMaskModule} from "ngx-mask";
+
 
 
 
@@ -21,7 +23,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     CommonModule,
     RouterModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule
   ],
   exports: [
     ArticlesCardComponent,

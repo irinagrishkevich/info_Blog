@@ -18,7 +18,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class PopupComponent implements OnInit {
   popupForm = this.fb.group({
     name: ['', [Validators.required, Validators.pattern(/^(?:[А-ЯЁ][а-яё]+(?: [А-ЯЁ][а-яё]+)*)?$/)]],
-    phone: ['', [Validators.required, Validators.pattern(/^(8|\+7)?(\(?\d{3}\)?)?[\d ]{7}$/)]],
+    phone: ['', [Validators.required]],
     service: [''],
   });
   popupType: PopupEnum = PopupEnum.order;

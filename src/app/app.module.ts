@@ -16,6 +16,8 @@ import { MainComponent } from './views/main/main.component';
 import { AuthInterceptor } from './core/auth.interceptor';
 import { HeaderComponent } from './shared/layout/header/header.component';
 import {PolicyComponent} from "./views/policy/policy.component";
+import { NgxMaskModule } from 'ngx-mask';
+
 
 
 @NgModule({
@@ -38,7 +40,12 @@ import {PolicyComponent} from "./views/policy/policy.component";
     CarouselModule,
     MatMenuModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxMaskModule.forRoot({
+      showMaskTyped : true,
+      // clearIfNotMatch : true
+    })
+
 
   ],
   providers: [
