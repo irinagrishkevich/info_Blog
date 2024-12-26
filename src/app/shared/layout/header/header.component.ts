@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth.service';
 import { DefaultResponseType } from 'src/types/default-response.type';
 import { UserInfoType } from 'src/types/user-info.type';
@@ -13,13 +13,18 @@ import { UserInfoType } from 'src/types/user-info.type';
 export class HeaderComponent implements OnInit {
   isLogged: boolean = false;
   userName: string = '';
+  currentFragment: string = '';
 
   constructor(private authServices: AuthService,
               private _snackBar: MatSnackBar,
-              private router: Router) {
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.activatedRoute.fragment.subscribe((fragment) => {
+      this.currentFragment = fragment || '';
+    });
     this.authServices.isLogged$.subscribe((isLoggedIn) => {
       this.isLogged = isLoggedIn;
       if (this.isLogged) {
@@ -49,7 +54,6 @@ export class HeaderComponent implements OnInit {
     );
   }
 
-  // Логика выхода из системы
   logout(): void {
     this.authServices.logout().subscribe({
       next:() => {

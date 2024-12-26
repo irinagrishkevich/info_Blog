@@ -5,26 +5,43 @@
       <div class="auth-inputs">
         <div class="auth-input">
           <input type="text" class="input"
-                 [ngStyle]="{'border-color': signUpForm.get('name')?.invalid
-                 && (signUpForm.get('name')?.touched || signUpForm.get('name')?.dirty) ?'red' : ''}"
+                 [ngStyle]="{'border-color': validName ?'red' : ''}"
                  placeholder="Ваше имя" formControlName="name">
+          <div class="input-error" *ngIf="this.signUpForm.get('name')?.hasError('required')
+                && this.signUpForm.get('name')?.touched">Введите ваше имя</div>
+          <div class="input-error" *ngIf="this.signUpForm.get('name')?.hasError('pattern')
+                && this.signUpForm.get('name')?.dirty">Имя может содержать русские буквы и пробелы</div>
         </div>
         <div class="auth-input">
           <input type="text" class="input"
-                 [ngStyle]="{'border-color': signUpForm.get('email')?.invalid
-                 && (signUpForm.get('email')?.touched || signUpForm.get('email')?.dirty) ?'red' : ''}"
+                 [ngStyle]="{'border-color': validEmail ? 'red' : ''}"
                  placeholder="Электронная почта" formControlName="email">
+          <div class="input-error" *ngIf="this.signUpForm.get('email')?.hasError('required')
+                && this.signUpForm.get('email')?.touched">Введите ваш адрес электронной почты</div>
+          <div class="input-error" *ngIf="this.signUpForm.get('email')?.hasError('email')
+                && this.signUpForm.get('email')?.dirty">Email должен быть корректным</div>
+
         </div>
         <div class="auth-input">
-          <input type="password" class="input"
-                 [ngStyle]="{'border-color': signUpForm.get('password')?.invalid
-                 && (signUpForm.get('password')?.touched || signUpForm.get('password')?.dirty) ?'red' : ''}"
+          <input [type]="passwordVisible ? 'text' : 'password'" class="input"
+                 [ngStyle]="{'border-color': validPassword ?'red' : ''}"
                  placeholder="Пароль" formControlName="password">
+          <img class="toggle-password" *ngIf="!passwordVisible" (click)="togglePasswordVisibility()" src="assets/images/auth/eye-look.svg" alt="toggle-password">
+          <img class="toggle-password" *ngIf="passwordVisible" (click)="togglePasswordVisibility()" src="assets/images/auth/eye-no-look.svg" alt="toggle-password">
+
         </div>
-        <div class="auth-checkbox">
-          <input type="checkbox" id="remember">
-          <label for="remember">Я принимаю <a>условия пользовательского соглашения</a> и даю <a>согласие на обработку персональных данных</a>.</label>
+
+        <div class="input-error" *ngIf="this.signUpForm.get('password')?.hasError('required')
+                && this.signUpForm.get('password')?.touched">Введите ваш пароль</div>
+        <div class="input-error" *ngIf="this.signUpForm.get('password')?.hasError('pattern')
+                && this.signUpForm.get('password')?.dirty">Пароль должен содержать цифры и буквы</div>
+
+        <div class="auth-checkbox" [ngClass]="{'has-error': validAgree}">
+          <input type="checkbox" id="agree" formControlName="agree">
+          <label for="agree">Я принимаю <a routerLink="/policy"  fragment="agreement">условия пользовательского соглашения</a> и даю <a
+            routerLink="/policy"  fragment="condition">согласие на обработку персональных данных</a>.</label>
         </div>
+        <div class="input-error" *ngIf="validAgree">Вы должны согласиться с условиями.</div>
       </div>
       <div class="auth-button">
         <button class="btn" [disabled]="signUpForm.invalid" (click)="signUp()">Войти</button>

@@ -1,0 +1,42 @@
+@import "../../../assets/styles/variables";
+@import "../../../assets/styles/mixins";
+
+.policy {
+  padding: 120px 0;
+  line-height: 130%;
+  word-spacing: 10px;
+  color: black;
+
+  .container{
+
+    .policy-title{
+      @include head-lora-38();
+      margin-bottom: 60px;
+      line-height: 130%;
+    }
+    .policy-text {
+      @include montserrat-20();
+      font-weight: 400;
+      color: black;
+      margin-bottom: 40px;
+    }
+
+    .policy-title-second {
+      @include head-lora-38();
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+
+    .policy-text-items-title{
+      @include head-lora-38();
+      color: $darkblue-text-color;
+      font-size: 26px;
+      margin-bottom: 20px;
+
+    }
+    .policy-text-item{
+      margin-bottom: 20px;
+    }
+  }
+}
+

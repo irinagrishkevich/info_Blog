@@ -46,6 +46,8 @@
 
 
       }
+
+
       .catalog-sorting {
         width: 148px;
         min-width: 148px;
@@ -70,29 +72,36 @@
           width: 100%;
           z-index: 3;
           display: none;
-          padding: 12px 23px;
+          padding: 17px 23px;
           border-radius: 0 0 5px 5px;
-          background: #EBEBEB;
           color: #BEBEBE;
+          background: #FFFFFF;
+          border: 2px solid #B9D5FD;
 
           .catalog-sorting-item{
-            margin-bottom: 19px;
             cursor: pointer;
-            padding: 10px;
+            padding-bottom: 25px;
             color: #BEBEBE;
             display: flex;
             justify-content: space-between;
 
-            &.selected{
-              color: $darkblue-text-color;
+            &:after{
+              content: '+';
+              font-size: 24px;
+              color: #BEBEBE;
             }
 
             &.active{
-              color: $darkblue-text-color
+              color: $darkblue-text-color;
+              &:after{
+                content: '-';
+                font-size: 24px;
+                color: $darkblue-text-color;
+              }
             }
 
             &:last-child{
-              margin-bottom: 12px;
+              padding-bottom: 0;
             }
           }
         }

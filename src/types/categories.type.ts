@@ -1,5 +1,6 @@
 export type CategoriesType = {
   id: string,
   name: string,
-  url: string
+  url: string,
+  categoriesName?: string
 }

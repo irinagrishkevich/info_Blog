@@ -1,0 +1,104 @@
+@import "../../../../assets/styles/variables";
+@import "../../../../assets/styles/mixins";
+
+.popup {
+  width: 727px;
+  height: 489px;
+  border-radius: 10px;
+  background: white;
+  border: 1px solid $blue-text-color;
+  position: fixed;
+  padding: 94px 153px 86px 153px;
+  box-sizing: border-box;
+  top: calc(50% - 245px);
+  left: calc(50% - 363px);
+  z-index: 4;
+  &.success {
+    padding: 163px 140px;
+  }
+  .popup-close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+  }
+  .popup-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 20px;
+
+    .popup-input{
+      .select, .input {
+        color: $blue-text-color;
+        width: 422px;
+        height: 53px;
+        padding: 10px;
+      }
+    }
+  }
+
+
+  .popup-action{
+    .button {
+      padding: 15px 0;
+      width: 422px;
+      height: 51px;
+
+      &.success {
+        font-weight: 500;
+        font-size: 12px;
+        padding: 10px 20px;
+        width: 73px;
+        box-sizing: border-box;
+        display: block;
+        margin: 0 auto;
+      }
+      div {
+        font-weight: 500;
+        font-size: 14px;
+        text-align: center;
+        color: red;
+        display: flex;
+      }
+    }
+  }
+}
+.popup-title {
+  @include head-lora-38();
+  text-align: center;
+  margin-bottom: 20px;
+}
+.popup-description {
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 40px;
+  color: #1E1A2B;
+}
+
+
+
+.input-error{
+  color: red;
+  font-size: 12px;
+  padding: 10px;
+}
+//::ng-deep .input{
+//  &:focus-visible{
+//    --mat-sys-tertiary: $blue-text-color !important;
+//  }
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+

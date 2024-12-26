@@ -57,6 +57,10 @@ footer.footer{
           font-weight: 500;
           color: $blue-text-color;
         }
+        .footer-content-icons{
+          display: flex;
+          gap: 12px;
+        }
         .footer-content-text{
           color: $darkblue-text-color;
           line-height: 130%;

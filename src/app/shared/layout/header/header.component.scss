@@ -23,9 +23,12 @@ header.header {
             list-style: none;
             border-bottom: 1px solid transparent;
 
-            &.active {
-              border-bottom-color: $blue-text-color;
+            a.active {
+              color: $blue-text-color;
+                border-bottom-color: $blue-text-color;
+
             }
+
 
 
             a {

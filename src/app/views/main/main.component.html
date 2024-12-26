@@ -30,7 +30,7 @@
               <div class="content-text" *ngIf="slide.description && slide.description != ''">
                 {{ slide.description }}
               </div>
-              <button href="#" class="btn">Подробнее</button>
+              <button class="btn" (click)="openPopup(type, title, name, slide.name)">Подробнее</button>
             </div>
             <div class="image">
               <img src="{{ slide.image }}" alt="">
@@ -57,7 +57,7 @@
     </owl-carousel-o>
   </div>
 </section>
-<section class="services">
+<section class="services" id="services">
   <div class="container">
     <div class="services-title">Услуги, которые мы предлагаем</div>
     <div class="services-items">
@@ -68,14 +68,14 @@
         <div class="services-item-additional">
           <div class="services-item-additional-price">{{ servicesItem.price }}</div>
           <div class="services-item-additional-btn">
-            <button class="btn">Подробнее</button>
+            <button class="btn" (click)="openPopup(type, title, name, servicesItem.name)" >Подробнее</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-<section class="info">
+<section class="info" id="info">
   <div class="container">
     <div class="info-blog">
       <div class="info-img" style="background-image: url('assets/images/page/info.png')"></div>
@@ -113,7 +113,7 @@
       <app-articles-card *ngFor="let article of articles" [article]="article"></app-articles-card>
     </div>
     <div class="articles-go-to-blog">
-      <a href="#">Перейти в блог
+      <a routerLink="/articles" fragment="articles">Перейти в блог
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M5.44392 1C5.59871 1 5.75349 1.05652 5.87569 1.17765L11.1873 6.44254C12.0508 7.29849 12.0508 8.70353 11.1873 9.55948L5.87569 14.8244C5.63944 15.0585 5.2484 15.0585 5.01215 14.8244C4.7759 14.5902 4.7759 14.2026 5.01215 13.9684L10.3238 8.70353C10.7148 8.31593 10.7148 7.68608 10.3238 7.29849L5.01215 2.0336C4.7759 1.79942 4.7759 1.41182 5.01215 1.17765C5.13435 1.0646 5.28914 1 5.44392 1Z"
@@ -125,7 +125,7 @@
   </div>
 </section>
 
-<section class="reviews">
+<section class="reviews" id="reviews">
   <div class="container">
     <div class="reviews-title">Отзывы о нашей работе</div>
     <div class="reviews-carousel">
@@ -177,8 +177,8 @@
     </div>
   </div>
 
-</section>
-<section class="contacts">
+</section >
+<section class="contacts" id="contacts">
   <div class="container">
     <div class="contacts-map">
       <iframe
@@ -198,11 +198,11 @@
         </div>
         <div class="contacts-content-blog">
           <div class="contacts-content-blog-title">Телефон</div>
-          <div class="contacts-content-blog-text">+7 (499) 343-13-34</div>
+          <a href="tel:+74993431334" class="contacts-content-blog-text">+7 (499) 343-13-34</a>
         </div>
         <div class="contacts-content-blog">
           <div class="contacts-content-blog-title">Электронный адрес</div>
-          <div class="contacts-content-blog-text">info@itstorm.com</div>
+          <a href="mailto:info@itstorm.com" class="contacts-content-blog-text">info@itstorm.com</a>
         </div>
         <div class="contacts-content-blog">
           <div class="contacts-content-blog-title">Мы в социальных сетях</div>

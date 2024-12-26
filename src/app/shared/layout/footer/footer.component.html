@@ -5,11 +5,11 @@
       <div class="footer-menu">
         <nav>
           <ul>
-            <li class="active"><a href="#">Услуги</a></li>
-            <li><a href="#">О нас</a></li>
-            <li><a href="#">Статьи</a></li>
-            <li><a href="#">Отзывы</a></li>
-            <li><a href="#">Контакты</a></li>
+            <li><a   routerLink="/" fragment="services" [ngClass]="{ active: currentFragment === 'services' }">Услуги</a></li>
+            <li><a  routerLink="/" fragment="info" [ngClass]="{ active: currentFragment === 'info' }">О нас</a></li>
+            <li><a  routerLink="/articles"  fragment="articles" [ngClass]="{ active: currentFragment === 'articles' }">Статьи</a></li>
+            <li><a  routerLink="/" fragment="reviews" [ngClass]="{ active: currentFragment === 'reviews' }">Отзывы</a></li>
+            <li><a  routerLink="/" fragment="contacts" [ngClass]="{ active: currentFragment === 'contacts' }">Контакты</a></li>
           </ul>
         </nav>
       </div>
@@ -22,11 +22,11 @@
       <div class="footer-content-item">
         <div class="footer-content-title">Телефон</div>
         <div class="footer-content-text">+7 (499) 343-13-34</div>
-        <button class="btn footer-btn">Перезвоните мне</button>
+        <button class="btn footer-btn" (click)="openPopup(type, title, name)" >Перезвоните мне</button>
       </div>
       <div class="footer-content-item">
         <div class="footer-content-title">E-mail</div>
-        <div class="footer-content-text small">info@itstorm.com</div>
+        <a href="mailto:info@itstorm.com" class="footer-content-text small">info@itstorm.com</a>
       </div>
       <div class="footer-content-item">
         <div class="footer-content-title">Мы в социальных сетях:</div>

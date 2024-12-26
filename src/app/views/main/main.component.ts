@@ -1,9 +1,11 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import {OwlOptions} from 'ngx-owl-carousel-o';
+import { PopupComponent } from 'src/app/shared/components/popup/popup.component';
 import {ArticlesService} from 'src/app/shared/services/articles.service';
-import {environment} from 'src/environments/environment';
-import {ArticleType} from 'src/types/article.type';
+import { PopupDataType } from 'src/types/popup-data.type';
 import {ArticleRelatedType} from "../../../types/article-related.type";
+import {PopupEnum} from "../../../types/popup.type";
 
 @Component({
   selector: 'app-main',
@@ -16,6 +18,7 @@ export class MainComponent implements OnInit {
       image: 'assets/images/page/main-car-3.png',
       special: 'Новость дня',
       title: '',
+      name: 'SMM',
       titleCon: ' в ТОП-10 SMM-агенств Москвы!',
       description: 'Мы благодарим каждого, кто голосовал за нас!',
       highlight: '6 место',
@@ -27,6 +30,7 @@ export class MainComponent implements OnInit {
       special: 'Предложение месяца',
       title: 'Продвижение в Instagram для вашего бизнеса',
       titleCon: '!',
+      name: 'SMM',
       description: '',
       highlight: '-15%',
       highlightColor: '#709FDC',
@@ -35,6 +39,7 @@ export class MainComponent implements OnInit {
       image: 'assets/images/page/main-car-2.png',
       special: 'Акция',
       title: 'Нужен грамотный',
+      name: 'Копирайтинг',
       titleCon: '?',
       description: 'Весь декабрь у нас действует акция на работу копирайтера.',
       highlight: 'копирайтер',
@@ -59,24 +64,28 @@ export class MainComponent implements OnInit {
     {
       img: 'assets/images/page/services_1.png',
       title: 'Создание сайтов',
+      name:'Фриланс',
       text: 'В краткие сроки мы создадим качественный и самое главное продающий сайт для продвижения Вашего бизнеса!',
       price: 'От 7 500₽'
     },
     {
       img: 'assets/images/page/services_2.png',
       title: 'Продвижение',
+      name: 'SMM',
       text: 'Вам нужен качественный SMM-специалист или грамотный таргетолог? Мы готовы оказать Вам услугу “Продвижения” на наивысшем уровне!',
       price: 'От 3 500₽'
     },
     {
       img: 'assets/images/page/services_3.png',
       title: 'Реклама',
+      name:'Таргет',
       text: 'Без рекламы не может обойтись ни один бизнес или специалист. Обращаясь к нам, мы гарантируем быстрый прирост клиентов за счёт правильно настроенной рекламы.',
       price: 'От 1 000₽',
     },
     {
       img: 'assets/images/page/services_4.png',
       title: 'Копирайтинг',
+      name:'Копирайтинг',
       text: 'Наши копирайтеры готовы написать Вам любые продающие текста, которые не только обеспечат рост охватов, но и помогут выйти на новый уровень в продажах.',
       price: 'От 7 50₽'
     }
@@ -143,14 +152,30 @@ export class MainComponent implements OnInit {
     nav: false
   }
 
+  type: PopupEnum = PopupEnum.order
+  title: string = 'Заявка на услугу'
+  name: string = 'Оставить заявку'
 
-  constructor(private articlesService: ArticlesService) {
+
+  constructor(private articlesService: ArticlesService,
+              private dialog: MatDialog
+  ) {
   }
 
   ngOnInit(): void {
     this.articlesService.getArticlesTop().subscribe(data => {
       this.articles = data;
     });
+  }
+
+  openPopup(type: PopupEnum, title: string, name: string, serviceName: string) {
+    const data: PopupDataType = {
+      type,
+      title,
+      name,
+      serviceName
+    }
+    this.dialog.open(PopupComponent, {data})
   }
 
 }

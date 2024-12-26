@@ -19,6 +19,8 @@ export class LoginComponent implements OnInit {
     password: ['', [Validators.required]],
     rememberMe: [false]
   })
+  loginError: string | null = null;
+  passwordVisible: boolean = false;
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
@@ -26,6 +28,9 @@ export class LoginComponent implements OnInit {
               private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+  }
+  togglePasswordVisibility(): void {
+    this.passwordVisible = !this.passwordVisible;
   }
 
   login(){
@@ -56,6 +61,10 @@ export class LoginComponent implements OnInit {
           },
           error: (errorResponse: HttpErrorResponse) => {
             if(errorResponse.error && errorResponse.error.message){
+              this.loginError = 'Неверный Email или пароль'
+              setTimeout(() => {
+                this.loginError = null
+              }, 1500)
               this._snackBar.open(errorResponse.error.message)
             } else {
               this._snackBar.open('Ошибка при авторизации')
@@ -64,6 +73,16 @@ export class LoginComponent implements OnInit {
         })
     }
 
+  }
+
+  get validEmail(): boolean | undefined {
+    return this.loginForm.get('email')?.invalid
+      && (this.loginForm.get('email')?.dirty || this.loginForm.get('email')?.touched)
+  }
+
+  get validPassword(): boolean | undefined {
+    return this.loginForm.get('password')?.invalid
+      && (this.loginForm.get('password')?.dirty || this.loginForm.get('password')?.touched)
   }
 
 }

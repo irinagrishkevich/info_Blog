@@ -35,8 +35,8 @@
         <div class="catalog-sorting-body">
           <div class="catalog-sorting-item"
                *ngFor="let categorie of categories"
-               [class.selected] ="getOptionActive(categorie.url)"
-               (click)="addCategory(categorie.url)"
+               [class.active]="addClassActive(categorie.url)"
+               (click)="addNewCategory(categorie.url)"
           >
             <span>{{ categorie.name }}</span>
           </div>

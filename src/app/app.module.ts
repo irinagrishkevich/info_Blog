@@ -15,6 +15,8 @@ import { SharedModule } from './shared/shared.module';
 import { MainComponent } from './views/main/main.component';
 import { AuthInterceptor } from './core/auth.interceptor';
 import { HeaderComponent } from './shared/layout/header/header.component';
+import {PolicyComponent} from "./views/policy/policy.component";
+
 
 @NgModule({
   declarations: [
@@ -22,12 +24,14 @@ import { HeaderComponent } from './shared/layout/header/header.component';
     HeaderComponent,
     FooterComponent,
     LayoutComponent,
-    MainComponent
+    MainComponent,
+    PolicyComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     MatSnackBarModule,
+    MatMenuModule,
     FormsModule,
     ReactiveFormsModule,
     SharedModule,

@@ -4,7 +4,6 @@ import { ArticlesService } from 'src/app/shared/services/articles.service';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { ActiveParamsUtil } from 'src/app/shared/utils/active-params.util';
 import { ActiveParamsType } from 'src/types/active-params.type';
-import { ArticleType } from 'src/types/article.type';
 import { CategoriesType } from 'src/types/categories.type';
 import {ArticleResponseType} from "../../../../types/article-response.type";
 import {AppliedFilterType} from "../../../../types/applied-filter.type";
@@ -17,7 +16,6 @@ import {AppliedFilterType} from "../../../../types/applied-filter.type";
 export class CatalogComponent implements OnInit {
 
   categories: CategoriesType[] = []
-  changeCategory = new EventEmitter();
   activeCategories: string[] = [];
   articles: ArticleResponseType | null = null;
   sortingOpen: boolean = false;
@@ -39,15 +37,18 @@ export class CatalogComponent implements OnInit {
         this.activeParams = ActiveParamsUtil.processParams(params);
         this.categories = categories;
 
+        this.activeCategories = this.activeParams.categories;
+
         this.appliedFilters = [];
         this.activeParams.categories.forEach(item => {
 
 
-          const foundCategory = this.categories.find(category => category.url === item);
-          if (foundCategory) {
+
+          const foundItem = this.categories.find(category => category.url === item);
+          if (foundItem) {
             this.appliedFilters.push({
-              name: foundCategory.name,
-              url: foundCategory.url
+              name: foundItem.name,
+              url: foundItem.url
             });
           }
         });
@@ -88,6 +89,10 @@ export class CatalogComponent implements OnInit {
   }
 
   openNextPage(): void {
+    console.log(this.activeParams.page)
+    if (this.activeParams.page === undefined || this.activeParams.page < this.pages.length) {
+      this.activeParams.page = 1
+    }
     if (this.activeParams.page && this.activeParams.page < this.pages.length) {
       this.activeParams.page++
       this.router.navigate(['/articles'], {queryParams: this.activeParams});
@@ -95,29 +100,26 @@ export class CatalogComponent implements OnInit {
   }
 
   removeAppliedFilter(url: string) {
-    this.activeParams.categories = this.activeParams.categories.filter(item => item !== url);
-
+    this.activeParams.categories = this.activeParams.categories.filter(category => category !== url);
     this.activeParams.page = 1;
+    this.updateRouterParams()
+  }
+  updateRouterParams(): void {
     this.router.navigate(['/articles'], {
       queryParams: this.activeParams
     });
   }
 
-  addCategory(url: string) {
+  addNewCategory(url: string) {
     if (this.activeParams.categories.some(category => category === url)) {
       return this.removeAppliedFilter(url);
     }
-
     this.activeParams.categories.push(url);
-
     this.activeParams.page = 1;
-    this.router.navigate(['/articles'], {
-      queryParams: this.activeParams
-    });
+    this.updateRouterParams()
   }
-
-  getOptionActive(activeUrl: string) {
-    return this.activeCategories.some(category => category === activeUrl);
+  addClassActive(url: string) {
+    return this.activeCategories.includes(url)
   }
 
 
