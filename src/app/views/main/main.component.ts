@@ -168,6 +168,8 @@ export class MainComponent implements OnInit {
     });
   }
 
+  
+
   openPopup(type: PopupEnum, title: string, name: string, serviceName: string) {
     const data: PopupDataType = {
       type,

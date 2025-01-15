@@ -19,6 +19,7 @@
                 </svg>
               </a>
             </div>
+
             <div class="content">
               <div class="content-special">{{ slide.special }}</div>
               <div class="content-title">{{ slide.title }}
@@ -27,7 +28,7 @@
                 </span>
                 <span class="title-con" *ngIf="slide.titleCon">{{ slide.titleCon }}</span>
               </div>
-              <div class="content-text" *ngIf="slide.description && slide.description != ''">
+              <div class="content-text" *ngIf="slide.description && slide.description !== ''">
                 {{ slide.description }}
               </div>
               <button class="btn" (click)="openPopup(type, title, name, slide.name)">Подробнее</button>
@@ -66,7 +67,7 @@
         <div class="services-item-title">{{ servicesItem.title }}</div>
         <div class="services-item-text">{{ servicesItem.text }}</div>
         <div class="services-item-additional">
-          <div class="services-item-additional-price">{{ servicesItem.price }}</div>
+          <div class="services-item-additional-price">{{ servicesItem.price}}</div>
           <div class="services-item-additional-btn">
             <button class="btn" (click)="openPopup(type, title, name, servicesItem.name)" >Подробнее</button>
           </div>

@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import {ArticleRelatedType} from "../../../../types/article-related.type";
@@ -9,14 +8,11 @@ import {ArticleRelatedType} from "../../../../types/article-related.type";
   templateUrl: './articles-card.component.html',
   styleUrls: ['./articles-card.component.scss']
 })
-export class ArticlesCardComponent implements OnInit {
+export class ArticlesCardComponent {
 
   @Input() article!: ArticleRelatedType;
   staticUrlImage: string = environment.serverStaticPath;
   constructor(private router: Router) { }
-
-  ngOnInit(): void {
-  }
 
   navigate(){
       this.router.navigate(['/articles/' + this.article.url])

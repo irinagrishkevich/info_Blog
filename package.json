@@ -6,10 +6,12 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
+    "@angular-eslint/eslint-plugin": "^19.0.2",
     "@angular/animations": "^14.2.0",
     "@angular/cdk": "^13.0.0",
     "@angular/common": "^14.2.0",
@@ -20,6 +22,8 @@
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
+    "@typescript-eslint/eslint-plugin": "^8.18.2",
+    "@typescript-eslint/parser": "^8.18.2",
     "ngx-mask": "^14.3.3",
     "ngx-owl-carousel-o": "^14.0.0",
     "rxjs": "~7.5.0",
@@ -28,9 +32,18 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.2.13",
+    "@angular-eslint/builder": "14.4.0",
+    "@angular-eslint/eslint-plugin": "14.4.0",
+    "@angular-eslint/eslint-plugin-template": "14.4.0",
+    "@angular-eslint/schematics": "14.4.0",
+    "@angular-eslint/template-parser": "14.4.0",
     "@angular/cli": "~14.2.13",
     "@angular/compiler-cli": "^14.2.0",
     "@types/jasmine": "~4.0.0",
+    "@typescript-eslint/eslint-plugin": "5.43.0",
+    "@typescript-eslint/parser": "5.43.0",
+    "angular-eslint": "19.0.2",
+    "eslint": "^8.28.0",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
@@ -39,6 +52,7 @@
     "karma-jasmine-html-reporter": "~2.0.0",
     "sass": "^1.83.0",
     "sass-loader": "^16.0.4",
-    "typescript": "~4.8.4"
+    "typescript": "~4.8.4",
+    "typescript-eslint": "8.18.0"
   }
 }

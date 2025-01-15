@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { LoginResponseType } from 'src/types/login-response.type';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -27,8 +27,6 @@ export class LoginComponent implements OnInit {
               private router: Router,
               private _snackBar: MatSnackBar) { }
 
-  ngOnInit(): void {
-  }
   togglePasswordVisibility(): void {
     this.passwordVisible = !this.passwordVisible;
   }
